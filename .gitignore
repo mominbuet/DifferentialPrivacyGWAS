@@ -1,0 +1,9 @@
+**/nbproject/private/
+*.javac
+pom.xml
+build/
+nbbuild/
+target/
+dist/
+nbdist/
+.nb-gradle/
