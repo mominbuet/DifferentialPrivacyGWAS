@@ -344,7 +344,7 @@ public class FisherTest {
                 while (true) {
                     preaddp = tprob;
                     tprob += row_prob;
-                    if (tprob <= preaddp) {
+                    if (tprob <= preaddp || tprob == Double.NaN) {
                         break;
                     }
                     cur21 += 1;
@@ -357,7 +357,7 @@ public class FisherTest {
                 while (true) {
                     preaddp = tprob;
                     tprob += row_prob;
-                    if (tprob <= preaddp) {
+                    if (tprob <= preaddp || tprob == Double.NaN) {
                         break;
                     }
                     cur11 += 1;

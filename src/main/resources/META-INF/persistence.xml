@@ -3,6 +3,14 @@
   <persistence-unit name="cs.umanitoba.ca_DPBinPacking_jar_1.0.0PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>DB.GwasPlaintext</class>
+    <class>DB.SequenceLocal</class>
+    <class>DB.Sequence</class>
+    <class>DB.SequenceUnchanged</class>
+    <class>DB.SnpsLocal</class>
+    <class>DB.GwasLocal</class>
+    <class>DB.GwasOriginal</class>
+    <class>DB.GwasLocalLaplace</class>
+    <class>DB.GwasOriginalLocal</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/genomic_data"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

@@ -25,20 +25,20 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author azizmma
  */
 @Entity
-@Table(name = "gwas_original_local")
+@Table(name = "gwas_original_local")//gwas_original
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GwasPlaintext.findAll", query = "SELECT g FROM GwasPlaintext g"),
-    @NamedQuery(name = "GwasPlaintext.findById", query = "SELECT g FROM GwasPlaintext g WHERE g.id = :id"),
-    @NamedQuery(name = "GwasPlaintext.findBySnpid", query = "SELECT g FROM GwasPlaintext g WHERE g.snpid = :snpid"),
-    @NamedQuery(name = "GwasPlaintext.findBySnpidCasecontrol", query = "SELECT g FROM GwasPlaintext g WHERE g.snpid = :snpid and g.casecontrol = :casecontrol"),
-    @NamedQuery(name = "GwasPlaintext.findByCasecontrol", query = "SELECT g FROM GwasPlaintext g WHERE g.casecontrol = :casecontrol"),
-    @NamedQuery(name = "GwasPlaintext.findByMajormajor", query = "SELECT g FROM GwasPlaintext g WHERE g.majormajor = :majormajor"),
-    @NamedQuery(name = "GwasPlaintext.findByMajorminor", query = "SELECT g FROM GwasPlaintext g WHERE g.majorminor = :majorminor"),
-    @NamedQuery(name = "GwasPlaintext.findByMinormajor", query = "SELECT g FROM GwasPlaintext g WHERE g.minormajor = :minormajor"),
-    @NamedQuery(name = "GwasPlaintext.findByMinorminor", query = "SELECT g FROM GwasPlaintext g WHERE g.minorminor = :minorminor"),
-    @NamedQuery(name = "GwasPlaintext.findByUpdated", query = "SELECT g FROM GwasPlaintext g WHERE g.updated = :updated")})
-public class GwasPlaintext implements Serializable {
+    @NamedQuery(name = "GwasOriginal.findAll", query = "SELECT g FROM GwasOriginal g order by g.snpid"),
+    @NamedQuery(name = "GwasOriginal.findById", query = "SELECT g FROM GwasOriginal g WHERE g.id = :id"),
+    @NamedQuery(name = "GwasOriginal.findBySnpid", query = "SELECT g FROM GwasOriginal g WHERE g.snpid = :snpid"),
+    @NamedQuery(name = "GwasOriginal.findBySnpidCasecontrol", query = "SELECT g FROM GwasOriginal g WHERE g.snpid = :snpid and g.casecontrol = :casecontrol"),
+    @NamedQuery(name = "GwasOriginal.findByCasecontrol", query = "SELECT g FROM GwasOriginal g WHERE g.casecontrol = :casecontrol"),
+    @NamedQuery(name = "GwasOriginal.findByMajormajor", query = "SELECT g FROM GwasOriginal g WHERE g.majormajor = :majormajor"),
+    @NamedQuery(name = "GwasOriginal.findByMajorminor", query = "SELECT g FROM GwasOriginal g WHERE g.majorminor = :majorminor"),
+    @NamedQuery(name = "GwasOriginal.findByMinormajor", query = "SELECT g FROM GwasOriginal g WHERE g.minormajor = :minormajor"),
+    @NamedQuery(name = "GwasOriginal.findByMinorminor", query = "SELECT g FROM GwasOriginal g WHERE g.minorminor = :minorminor"),
+    @NamedQuery(name = "GwasOriginal.findByUpdated", query = "SELECT g FROM GwasOriginal g WHERE g.updated = :updated")})
+public class GwasOriginal implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -68,14 +68,14 @@ public class GwasPlaintext implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updated;
 
-    public GwasPlaintext() {
+    public GwasOriginal() {
     }
 
-    public GwasPlaintext(Integer id) {
+    public GwasOriginal(Integer id) {
         this.id = id;
     }
 
-    public GwasPlaintext(Integer id, String snpid, int casecontrol, int majormajor, int majorminor, int minormajor, int minorminor, Date updated) {
+    public GwasOriginal(Integer id, String snpid, int casecontrol, int majormajor, int majorminor, int minormajor, int minorminor, Date updated) {
         this.id = id;
         this.snpid = snpid;
         this.casecontrol = casecontrol;
@@ -160,10 +160,10 @@ public class GwasPlaintext implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GwasPlaintext)) {
+        if (!(object instanceof GwasOriginal)) {
             return false;
         }
-        GwasPlaintext other = (GwasPlaintext) object;
+        GwasOriginal other = (GwasOriginal) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -172,7 +172,7 @@ public class GwasPlaintext implements Serializable {
 
     @Override
     public String toString() {
-        return "DB.GwasPlaintext[ id=" + id + " ]";
+        return "DB.GwasOriginal[ id=" + id + " ]";
     }
     
 }

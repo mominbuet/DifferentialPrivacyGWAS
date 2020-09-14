@@ -11,15 +11,19 @@ package cs.umanitoba.ca.dpbinpacking;
  */
 public class DPAlgorithms {
 
-    double epsilon_max, epsilon_min, selection_prob, current_epsilon;
+    public double epsilon_max, epsilon_min, selection_prob, current_epsilon;
     int id = 0;
 
     public void add_selection(double prob) {
         this.selection_prob = this.selection_prob + prob;
     }
 
+    public void enforce_penalty2() {
+        this.selection_prob = this.selection_prob * (epsilon_min / epsilon_max);
+    }
+
     public void enforce_penalty() {
-        this.selection_prob = this.selection_prob * (1 - (epsilon_max - epsilon_min)/epsilon_max);
+        this.selection_prob = this.selection_prob * (1 - (epsilon_max - epsilon_min) / epsilon_max);
     }
 
     public double getCurrent_epsilon() {

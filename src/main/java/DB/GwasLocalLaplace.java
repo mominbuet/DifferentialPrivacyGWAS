@@ -25,20 +25,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author azizmma
  */
 @Entity
-@Table(name = "gwas_original_local")
+@Table(name = "gwas_local_laplace_5")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "GwasPlaintext.findAll", query = "SELECT g FROM GwasPlaintext g"),
-    @NamedQuery(name = "GwasPlaintext.findById", query = "SELECT g FROM GwasPlaintext g WHERE g.id = :id"),
-    @NamedQuery(name = "GwasPlaintext.findBySnpid", query = "SELECT g FROM GwasPlaintext g WHERE g.snpid = :snpid"),
-    @NamedQuery(name = "GwasPlaintext.findBySnpidCasecontrol", query = "SELECT g FROM GwasPlaintext g WHERE g.snpid = :snpid and g.casecontrol = :casecontrol"),
-    @NamedQuery(name = "GwasPlaintext.findByCasecontrol", query = "SELECT g FROM GwasPlaintext g WHERE g.casecontrol = :casecontrol"),
-    @NamedQuery(name = "GwasPlaintext.findByMajormajor", query = "SELECT g FROM GwasPlaintext g WHERE g.majormajor = :majormajor"),
-    @NamedQuery(name = "GwasPlaintext.findByMajorminor", query = "SELECT g FROM GwasPlaintext g WHERE g.majorminor = :majorminor"),
-    @NamedQuery(name = "GwasPlaintext.findByMinormajor", query = "SELECT g FROM GwasPlaintext g WHERE g.minormajor = :minormajor"),
-    @NamedQuery(name = "GwasPlaintext.findByMinorminor", query = "SELECT g FROM GwasPlaintext g WHERE g.minorminor = :minorminor"),
-    @NamedQuery(name = "GwasPlaintext.findByUpdated", query = "SELECT g FROM GwasPlaintext g WHERE g.updated = :updated")})
-public class GwasPlaintext implements Serializable {
+    @NamedQuery(name = "GwasLocalLaplace.findAll", query = "SELECT g FROM GwasLocalLaplace g"),
+    @NamedQuery(name = "GwasLocalLaplace.findById", query = "SELECT g FROM GwasLocalLaplace g WHERE g.id = :id"),
+    @NamedQuery(name = "GwasLocalLaplace.findBySnpid", query = "SELECT g FROM GwasLocalLaplace g WHERE g.snpid = :snpid"),
+    @NamedQuery(name = "GwasLocalLaplace.findByCasecontrol", query = "SELECT g FROM GwasLocalLaplace g WHERE g.casecontrol = :casecontrol"),
+    @NamedQuery(name = "GwasLocalLaplace.findBySnpidCasecontrol", query = "SELECT g FROM GwasLocalLaplace g WHERE g.snpid = :snpid and g.casecontrol = :casecontrol and g.dpClass = :dpClass"),
+    @NamedQuery(name = "GwasLocalLaplace.findByMajormajor", query = "SELECT g FROM GwasLocalLaplace g WHERE g.majormajor = :majormajor"),
+    @NamedQuery(name = "GwasLocalLaplace.findByMajorminor", query = "SELECT g FROM GwasLocalLaplace g WHERE g.majorminor = :majorminor"),
+    @NamedQuery(name = "GwasLocalLaplace.findByMinormajor", query = "SELECT g FROM GwasLocalLaplace g WHERE g.minormajor = :minormajor"),
+    @NamedQuery(name = "GwasLocalLaplace.findByMinorminor", query = "SELECT g FROM GwasLocalLaplace g WHERE g.minorminor = :minorminor"),
+    @NamedQuery(name = "GwasLocalLaplace.findByUpdated", query = "SELECT g FROM GwasLocalLaplace g WHERE g.updated = :updated"),
+    @NamedQuery(name = "GwasLocalLaplace.findByDpClass", query = "SELECT g FROM GwasLocalLaplace g WHERE g.dpClass = :dpClass")})
+public class GwasLocalLaplace implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,29 +54,32 @@ public class GwasPlaintext implements Serializable {
     private int casecontrol;
     @Basic(optional = false)
     @Column(name = "majormajor")
-    private int majormajor;
+    private double majormajor;
     @Basic(optional = false)
     @Column(name = "majorminor")
-    private int majorminor;
+    private double majorminor;
     @Basic(optional = false)
     @Column(name = "minormajor")
-    private int minormajor;
+    private double minormajor;
     @Basic(optional = false)
     @Column(name = "minorminor")
-    private int minorminor;
+    private double minorminor;
     @Basic(optional = false)
     @Column(name = "updated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updated;
+    @Basic(optional = false)
+    @Column(name = "dp_class")
+    private String dpClass;
 
-    public GwasPlaintext() {
+    public GwasLocalLaplace() {
     }
 
-    public GwasPlaintext(Integer id) {
+    public GwasLocalLaplace(Integer id) {
         this.id = id;
     }
 
-    public GwasPlaintext(Integer id, String snpid, int casecontrol, int majormajor, int majorminor, int minormajor, int minorminor, Date updated) {
+    public GwasLocalLaplace(Integer id, String snpid, int casecontrol, double majormajor, double majorminor, double minormajor, double minorminor, Date updated, String dpClass) {
         this.id = id;
         this.snpid = snpid;
         this.casecontrol = casecontrol;
@@ -84,6 +88,7 @@ public class GwasPlaintext implements Serializable {
         this.minormajor = minormajor;
         this.minorminor = minorminor;
         this.updated = updated;
+        this.dpClass = dpClass;
     }
 
     public Integer getId() {
@@ -110,35 +115,35 @@ public class GwasPlaintext implements Serializable {
         this.casecontrol = casecontrol;
     }
 
-    public int getMajormajor() {
+    public double getMajormajor() {
         return majormajor;
     }
 
-    public void setMajormajor(int majormajor) {
+    public void setMajormajor(double majormajor) {
         this.majormajor = majormajor;
     }
 
-    public int getMajorminor() {
+    public double getMajorminor() {
         return majorminor;
     }
 
-    public void setMajorminor(int majorminor) {
+    public void setMajorminor(double majorminor) {
         this.majorminor = majorminor;
     }
 
-    public int getMinormajor() {
+    public double getMinormajor() {
         return minormajor;
     }
 
-    public void setMinormajor(int minormajor) {
+    public void setMinormajor(double minormajor) {
         this.minormajor = minormajor;
     }
 
-    public int getMinorminor() {
+    public double getMinorminor() {
         return minorminor;
     }
 
-    public void setMinorminor(int minorminor) {
+    public void setMinorminor(double minorminor) {
         this.minorminor = minorminor;
     }
 
@@ -148,6 +153,14 @@ public class GwasPlaintext implements Serializable {
 
     public void setUpdated(Date updated) {
         this.updated = updated;
+    }
+
+    public String getDpClass() {
+        return dpClass;
+    }
+
+    public void setDpClass(String dpClass) {
+        this.dpClass = dpClass;
     }
 
     @Override
@@ -160,10 +173,10 @@ public class GwasPlaintext implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof GwasPlaintext)) {
+        if (!(object instanceof GwasLocalLaplace)) {
             return false;
         }
-        GwasPlaintext other = (GwasPlaintext) object;
+        GwasLocalLaplace other = (GwasLocalLaplace) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -172,7 +185,7 @@ public class GwasPlaintext implements Serializable {
 
     @Override
     public String toString() {
-        return "DB.GwasPlaintext[ id=" + id + " ]";
+        return "DB.GwasLocalLaplace[ id=" + id + " ]";
     }
     
 }

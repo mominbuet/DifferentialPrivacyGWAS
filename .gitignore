@@ -5,5 +5,8 @@ build/
 nbbuild/
 target/
 dist/
+src/main/resources/
 nbdist/
 .nb-gradle/
+*.txt
+*.xml
